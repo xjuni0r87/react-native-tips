@@ -1,0 +1,13 @@
+# Logs
+*.log
+
+# Runtime data
+tmp
+.babelrc
+
+# Dependency directory
+node_modules
+bower_components
+
+doc
+example

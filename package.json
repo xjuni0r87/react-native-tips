@@ -1,0 +1,59 @@
+{
+  "name": "react-native-tips",
+  "version": "0.0.1",
+  "description": "Helper to show tips when you launch your react-native for the first time",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:dev": "yarn test -- --watch"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "testMatch": [
+      "**/*.test.js"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-react-native": "^3.2.1",
+    "jest": "^22.2.1",
+    "jest-react-native": "^18.0.0",
+    "react-test-renderer": "^16.2.0",
+    "@storybook/react": "^3.3.13",
+    "@storybook/addon-actions": "^3.3.13",
+    "@storybook/addon-links": "^3.3.13",
+    "@storybook/addons": "^3.3.13",
+    "babel-core": "^6.26.0"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-native": "^0.53.0",
+    "styled-components": "^3.1.6",
+    "react-test-renderer": "^16.2.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  }
+}
