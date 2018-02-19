@@ -1,12 +1,25 @@
 {
   "name": "react-native-tips",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Helper to show tips when you launch your react-native for the first time",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "test:dev": "yarn test -- --watch"
   },
+  "bugs": {
+    "url": "https://github.com/myvertigo/react-native-tips/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myvertigo/react-native-tips"
+  },
+  "keywords": [
+    "reactnative",
+    "react-native",
+    "tips",
+    "tooltip"
+  ],
   "jest": {
     "collectCoverage": true,
     "coverageReporters": [
