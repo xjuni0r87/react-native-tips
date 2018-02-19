@@ -1,5 +1,5 @@
 # react-native-tips
-[![Build Status](https://travis-ci.org/myvertigo/react-native-tips.svg?branch=master)](https://travis-ci.org/myvertigo/react-native-tips)
+[![Build Status](https://travis-ci.org/frichti/react-native-tips.svg?branch=master)](https://travis-ci.org/frichti/react-native-tips)
 
 This module is used to create tips on your app to help your new users to understand how is your app.
 
