@@ -19,6 +19,7 @@ import Tips from 'react-native-tips'
 
 import StatusBar from './Components/StatusBar'
 import Menu from './Components/Menu'
+import { STATUSBAR_HEIGHT } from './constants'
 
 
 const instructions = Platform.select({
@@ -217,7 +218,7 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
+    paddingTop: STATUSBAR_HEIGHT,
     paddingLeft: 15,
     paddingRight: 15,
     minHeight: '100%',
@@ -273,21 +274,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: primaryColor
+    ...Platform.select({
+      ios: {
+        paddingBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: primaryColor
+      }
+    })
   },
   formIcon: {
     color: primaryColor,
     marginRight: 10,
-    alignSelf: 'flex-start'
+    alignSelf: 'center'
   },
   formInput: {
     flex: 1
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: 'left',
     margin: 10,
   },
   instructions: {

@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import ReactMixin from 'react-mixin'
+import TimerMixin from 'react-timer-mixin'
 import styled from 'styled-components/native'
 import {
   Text, View, Modal, StyleSheet,
@@ -165,6 +167,7 @@ export default class Tips extends PureComponent {
     }
 
     this.view = null
+    this.tooltip = null
 
     this.handleLayout = this.handleLayout.bind(this)
     this.handleTooltipLayout = this.handleTooltipLayout.bind(this)
@@ -215,14 +218,16 @@ export default class Tips extends PureComponent {
    * @param {Boolean=} willBeReady - If true, the component state will be ready to be visible
    */
   updateComponentPosition(willBeReady = false) {
-    this.view.measure((x, y, width, height, pageX, pageY) => {
-      this.setState(state => ({
-        ready: willBeReady || state.ready,
-        componentLeft: pageX,
-        componentTop: pageY,
-        componentWidth: state.componentWidth || width,
-        componentHeight: state.componentHeight || height
-      }))
+    this.requestAnimationFrame(() => {
+      this.view.measure((x, y, width, height, pageX, pageY) => {
+        this.setState(state => ({
+          ready: willBeReady || state.ready,
+          componentLeft: pageX,
+          componentTop: pageY,
+          componentWidth: state.componentWidth || width,
+          componentHeight: state.componentHeight || height
+        }))
+      })
     })
   }
 
@@ -238,7 +243,6 @@ export default class Tips extends PureComponent {
       componentHeight: height
     })
 
-    console.log('handle layout', this.props.text)
     this.updateComponentPosition()
   }
 
@@ -269,6 +273,7 @@ export default class Tips extends PureComponent {
 
         case 'bottom':
           nextState.tooltipLeft = Math.max(-componentLeft, (componentWidth / 2) - (width / 2))
+          nextState.tooltipTop = 10
           break
 
         case 'top':
@@ -324,8 +329,14 @@ export default class Tips extends PureComponent {
     const visible = this.props.visible && ready
 
     return (
-      <View ref={(view) => { this.view = view }}>
-        <View onLayout={this.handleLayout}>{children}</View>
+      <View
+        collapsable={false}
+        renderToHardwareTextureAndroid
+        ref={(view) => { this.view = view }}
+      >
+        <View onLayout={this.handleLayout}>
+          {children}
+        </View>
 
         <Modal
           animationType="fade"
@@ -351,6 +362,9 @@ export default class Tips extends PureComponent {
                 </View>
 
                 <View
+                  renderToHardwareTextureAndroid
+                  collapsable={false}
+                  ref={(tooltip) => { this.tooltip = tooltip }}
                   onLayout={this.handleTooltipLayout}
                   style={[styles.tooltipContainer, {
                     top: tooltipTop,
@@ -361,7 +375,9 @@ export default class Tips extends PureComponent {
                     style={style}
                   >
                     {content}
-                    {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
+                    {text && (
+                      <Text style={[styles.text, textStyle]}>{text}</Text>
+                    )}
                     {position !== 'none' && <TooltipArrow position={position} />}
                   </Tooltip>
                 </View>
@@ -413,3 +429,6 @@ Tips.propTypes = {
   content: PropTypes.node,
   visible: PropTypes.bool
 }
+
+
+ReactMixin(Tips.prototype, TimerMixin)

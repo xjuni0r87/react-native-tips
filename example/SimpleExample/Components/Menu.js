@@ -4,7 +4,7 @@ import { Modal, View, Animated, StyleSheet, Text, TouchableOpacity } from 'react
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Tips from 'react-native-tips'
 
-import { PANEL_WIDTH, PRIMARY_COLOR } from './../constants'
+import { PANEL_WIDTH, PRIMARY_COLOR, STATUSBAR_HEIGHT } from './../constants'
 import StatusBar from './StatusBar'
 
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 
   closeIcon: {
     position: 'absolute',
-    top: 35,
+    top: STATUSBAR_HEIGHT + 5,
     left: 15,
     color: PRIMARY_COLOR
   },
@@ -49,18 +49,22 @@ const styles = StyleSheet.create({
 
   tipsFinal: {
     alignSelf: 'center',
-    top: '200%',
+    display: 'flex',
+    alignItems: 'center',
     backgroundColor: 'rgba(56, 142, 60, 0.7)'
   },
 
   tipsFinalContent: {
-    width: '100%'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    top: '40%'
   },
 
   mood: {
     color: 'white',
-    marginBottom: 10,
-    alignSelf: 'center'
+    marginBottom: 10
   }
 })
 
