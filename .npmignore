@@ -11,3 +11,5 @@ bower_components
 
 doc
 example
+.storybook
+storybook

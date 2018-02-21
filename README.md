@@ -3,7 +3,9 @@
 
 This module is used to create tips on your app to help your new users to understand how is your app.
 
-![alt text](https://github.com/myvertigo/react-native-tips/raw/master/doc/react-native-tips.gif "react-native-tips")
+| Ios | Android |
+|-----|---------|
+|![alt text](https://github.com/myvertigo/react-native-tips/raw/master/doc/react-native-tips.gif "react-native-tips on IOS") | ![alt text](https://github.com/myvertigo/react-native-tips/raw/master/doc/react-native-tips-android.gif "react-native-tips on Android") |
 
 
 # How to install
