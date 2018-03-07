@@ -142,14 +142,45 @@ export default class MyButton extends PureComponent {
 }
 ```
 
+## Use Tips only one time
+
+In most of the cases, you only want tips on first startup on your app or when your app has been updated.
+It is possible to do it with the Waterfall Tips helper :
+
+```js
+  this.waterfallTips = new Tips.Waterfall(
+    ['myTips1', 'myTips2'],
+    {
+      onEnd: async () => {
+        await AsyncStorage.setItem('@Tips', true)
+      }
+    }
+  )
+
+  const isWaterfallAlreadyFinished = await AsyncStorage.getItem('@Tips')
+
+  if (isWaterfallAlreadyFinished) {
+    this.waterfallTips.options.disabled = true
+  }
+```
+
+Options can be instanciated at the constructor or wherever you want.
+
+
 ## methods of Tips.Waterfall:
 
 | Method | Description |
 |----------------|--------------------------------------|
-| new Tips.Waterfall(indexes: *Array< String >*): Tips.Waterfall | Instanciate a new waterfallTips helper. |
+| new Tips.Waterfall(indexes: *Array< String >*, options: optionsObject): Tips.Waterfall | Instanciate a new waterfallTips helper. |
 | start(): *String* | Start the waterfall and set the first index has the current index. |
 | isVisible(index: *String*): *Boolean* | Check if the index passed in parameter is the current index. |
 | createIndex(index: *String*): *String* | Create a new index key. |
 | next(): *String* | Set the next index has the current index. If it was the last key, the value will be `null` |
 | previous(): *String* | Set the previous index has the current index. If it was the first key, the value will be **the first key**. |
 
+## options of Tips.Waterfall:
+| Name | Type | Description |
+|------|------|-------------|
+| onIndexChange | `Function` (index: *Boolean*) | Triggered when index has changed.  |
+| onEnd | `Function` | Triggered when all tips have been shown. |
+| disabled | `Boolean` | If true, the index will always return `null` and no Tips will be shown. |
