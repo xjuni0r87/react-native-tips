@@ -3,9 +3,10 @@ export default class WaterfallTips {
    * @constructor
    * @param {*} indexes - Indexes to create
    */
-  constructor(indexes = []) {
-    this.index = null
+  constructor(indexes = [], options = {}) {
+    this._index = null
     this.indexes = {}
+    this.options = options
 
     indexes.forEach(index => this.createIndex(index))
   }
@@ -25,7 +26,7 @@ export default class WaterfallTips {
    * @returns {Boolean} Is visible or not
    */
   isVisible(index = '') {
-    return index === this.index.name
+    return this.index ? index === this.index.name : false
   }
 
   /**
@@ -66,15 +67,20 @@ export default class WaterfallTips {
   }
 
 
-  /* EVENTS */
+  /* METHODS */
 
   /**
    * Trigger the next tips
    */
   next() {
-    if (!this.index
-      || (this.index && this.index.position + 1 >= Object.keys(this.indexes).length)) {
+    const isFinished = this.index && this.index.position + 1 >= Object.keys(this.indexes).length
+
+    if (!this.index || isFinished) {
       this.index = null
+
+      if (this.options.onEnd) {
+        this.options.onEnd()
+      }
     } else {
       this.index = this.getIndexByPosition(this.index.position + 1)
     }
@@ -91,5 +97,30 @@ export default class WaterfallTips {
     }
 
     return this.index && this.index.name
+  }
+
+
+  /* ACCESSORS */
+
+  /**
+   * Get the current index
+   * @returns {Object}
+   */
+  get index() {
+    return this.options.disabled ? null : this._index
+  }
+
+  /**
+   * Set the new index
+   * @returns {Object}
+   */
+  set index(index) {
+    if (index !== this._index) {
+      this._index = index
+
+      if (this.options.onIndexChange) {
+        this.options.onIndexChange(index && index.name)
+      }
+    }
   }
 }

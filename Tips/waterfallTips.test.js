@@ -66,9 +66,25 @@ describe('WaterfallTips testing', () => {
     })
   })
 
+  it('should go to the next waterfall tips and trigger the event "onIndexChange"', () => {
+    waterfall.options.onIndexChange = (index) => {
+      waterfall.options.onIndexChange = null
+      expect(index).toBe("ok")
+    }
+
+    waterfall.next()
+  })
+
+  it('should trigger "onEnd" event at the end of waterfall', (done) => {
+    waterfall.options.onEnd = () => {
+      waterfall.options.onEnd = null
+      done()
+    }
+
+    waterfall.next()
+  })
+
   it('should return null if we call "next" at the end of the waterfall', () => {
-    waterfall.next()
-    waterfall.next()
     waterfall.next()
 
     expect(waterfall.index).toBeNull()
@@ -106,5 +122,13 @@ describe('WaterfallTips testing', () => {
 
   it('should return false if the index not corresponding to the index passed to parameter', () => {
     expect(waterfall.isVisible('ok')).toBeFalsy()
+  })
+
+  it('should set index to "null" if options.disabled is set to true', () => {
+    waterfall.options.disabled = true
+
+    const index = waterfall.start()
+    expect(index).toBeNull()
+    expect(waterfall.isVisible('test')).toBeFalsy()
   })
 })
