@@ -63,7 +63,10 @@ const getArrowStyleByPosition = (position = 'top') => {
 
 const TooltipArrow = styled.View`
   position: absolute;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  shadow-offset: { width: 0, height: 0 };
+  shadow-radius: 1px;
+  shadow-color: black;
+  shadow-opacity: 0.5;
   ${props => getArrowStyleByPosition(props.position)}
 `
 
@@ -72,7 +75,10 @@ const Tooltip = styled.View`
   flex: -1;
   padding: 10px;
   border-radius: 4px;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  shadow-offset: { width: 0, height: 0 };
+  shadow-radius: 1px;
+  shadow-color: black;
+  shadow-opacity: 0.5;
 `
 
 const ModalContent = styled.View`

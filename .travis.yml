@@ -1,4 +1,5 @@
 language: node_js
+install: npm cache verify && npm i
 node_js:
   - "stable"
 script:

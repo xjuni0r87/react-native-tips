@@ -1,4 +1,5 @@
-import WaterfallTips from './WaterfallTips'
+import WaterfallTips from './../Tips/WaterfallTips'
+
 
 describe('WaterfallTips testing', () => {
   let waterfall
