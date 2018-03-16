@@ -180,6 +180,15 @@ export default class Tips extends PureComponent {
   }
 
   /**
+   * @componentDidMount
+   */
+  componentWillMount() {
+    if (this.props.visible) {
+      this.updateComponentPosition(true)
+    }
+  }
+
+  /**
    * @componentWillReceiveProps
    * @param {*} nextProps - Next properties of the PureComponent
    */
