@@ -182,7 +182,7 @@ export default class Tips extends PureComponent {
   /**
    * @componentDidMount
    */
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.visible) {
       this.updateComponentPosition(true)
     }
