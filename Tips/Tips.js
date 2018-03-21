@@ -177,7 +177,7 @@ export default class Tips extends PureComponent {
 
     this.handleLayout = this.handleLayout.bind(this)
     this.handleTooltipLayout = this.handleTooltipLayout.bind(this)
-    this.handleRequestNext = this.handleRequestNext.bind(this)
+    this.handleRequestClose = this.handleRequestClose.bind(this)
   }
 
   /**
@@ -315,14 +315,16 @@ export default class Tips extends PureComponent {
   /**
    * Handle event to switch between 'onRequestNext' and 'onRequestClose'
    */
-  handleRequestNext() {
+  handleRequestClose() {
     const { onRequestNext, onRequestClose } = this.props
 
     if (onRequestNext) {
       return onRequestNext()
     }
 
-    return !!onRequestClose && onRequestClose()
+    if (onRequestClose) {
+      return onRequestClose()
+    }
   }
 
 
@@ -366,7 +368,7 @@ export default class Tips extends PureComponent {
             activeOpacity={1}
             focusedOpacity={1}
             style={{ flex: 1 }}
-            onPress={this.handleRequestNext}
+            onPress={this.handleRequestClose}
           >
             <View style={[styles.modal, modalStyle]}>
               <ModalContent
@@ -391,13 +393,13 @@ export default class Tips extends PureComponent {
                     style={style}
                   >
                     {content}
-                    {text && <Text style={[styles.text, textStyle]}>{text}</Text>}
+                    {!!text && <Text style={[styles.text, textStyle]}>{text}</Text>}
                     {position !== 'none' && <TooltipArrow position={position} />}
                   </Tooltip>
                 </View>
 
                 <ChildrenOverlay
-                  onPress={this.handleRequestNext}
+                  onPress={this.handleRequestClose}
                   style={styles.childrenOverlay}
                 />
               </ModalContent>
@@ -427,7 +429,7 @@ Tips.defaultProps = {
   text: '',
   position: 'top',
   onRequestClose: () => {},
-  onRequestNext: () => {}
+  onRequestNext: null
 }
 
 

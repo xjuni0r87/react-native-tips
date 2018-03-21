@@ -139,7 +139,6 @@ exports[`<Tips /> should make tips visible 1`] = `
                 ]
               }
             >
-              
               <View
                 position="top"
                 style={
@@ -341,7 +340,6 @@ exports[`<Tips /> should render and not be visible 1`] = `
                 ]
               }
             >
-              
               <View
                 position="top"
                 style={
