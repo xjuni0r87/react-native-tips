@@ -85,10 +85,13 @@ exports[`<Tips /> should make tips visible 1`] = `
         >
           <View
             style={
-              Object {
-                "height": 0,
-                "width": 0,
-              }
+              Array [
+                Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                Object {},
+              ]
             }
           >
             <Text
@@ -111,6 +114,7 @@ exports[`<Tips /> should make tips visible 1`] = `
                   "left": 0,
                   "top": 0,
                 },
+                Object {},
               ]
             }
           >
@@ -283,10 +287,13 @@ exports[`<Tips /> should render and not be visible 1`] = `
         >
           <View
             style={
-              Object {
-                "height": 0,
-                "width": 0,
-              }
+              Array [
+                Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                Object {},
+              ]
             }
           >
             <Text
@@ -309,6 +316,7 @@ exports[`<Tips /> should render and not be visible 1`] = `
                   "left": 0,
                   "top": 0,
                 },
+                Object {},
               ]
             }
           >
