@@ -8,6 +8,10 @@ This module is used to create tips on your app to help your new users to underst
 |![alt text](https://github.com/myvertigo/react-native-tips/raw/master/doc/react-native-tips.gif "react-native-tips on IOS") | ![alt text](https://github.com/myvertigo/react-native-tips/raw/master/doc/react-native-tips-android.gif "react-native-tips on Android") |
 
 
+# Update to v0.0.8 - Deprecation warning
+- `onRequestNext` is deprecated. It will be removed in the next update. Be sure to replace it
+by `onRequestClose` which do the same thing.
+
 # How to install
  
 Via NPM
@@ -61,19 +65,21 @@ export default MyButton
 | Property | Type | Requirement | Description |
 |----------------|---------------|-----------|--------------------------------------|
 | children | node | Optional | The `children` of Tips are elements that will be highlighted when the tips will be visible |
-| position | enum (`top`, `left`, `right`, `bottom` or `none`) | Default: `top` | Define the position of your tips related to the children. |
-| visible | Boolean | Default: `false` | Set the visibility of your Tips |
-| text | String | Optional | Text inside the Tips. |
+| childrenStyle | Object | Optional | Override the style of the container of the children |
 | content | node | Optional | Use this property if you want to add more than a simple text inside your Tips. |
-| onRequestClose | function | Optional | Triggered when the user tap on  the screen. |
-| onRequestNext | function | Optional | Triggered when the user tap on the screen. (See #waterfall-tips for more.) |
-| style | Object | Optional | Override the style of your tips |
-| modalStyle | Object | Optional | Override the style of the Modal Component (react-native) |
 | contentStyle | Object | Optional | Override the style of the content of the Modal (used for positionning the highlight elements and tips) |
-| textStyle | Object | Optional | Override the style of the text inside the Tips |
+| delay | Number | Optional (default: 250) | Add a delay before showing the Tips |
+| modalStyle | Object | Optional | Override the style of the Modal Component (react-native) |
 | offsetLeft | Number | Optional | Add an offset of the Tips in x axis. |
 | offsetTop | Number | Optional | Add an offset of the Tips in y axis. |
-
+| onRequestClose | function | Optional | Triggered when the user tap on  the screen. |
+| onRequestNext | function | Deprecated !!! Optional | Deprecated !!! Use onRequestClose instead. (See #waterfall-tips for more.) |
+| position | enum (`top`, `left`, `right`, `bottom` or `none`) | Default: `top` | Define the position of your tips related to the children. |
+| style | Object | Optional | Override the style of your tips |
+| text | String | Optional | Text inside the Tips. |
+| textStyle | Object | Optional | Override the style of the text inside the Tips |
+| tooltipContainerStyle | Object | Optional | Override the style of the container of your tips (used for positionning) |
+| visible | Boolean | Default: `false` | Set the visibility of your Tips |
 
 
 # Waterfall Tips
@@ -125,14 +131,14 @@ export default class MyButton extends PureComponent {
       <View>
         <Tips
           visible={tipsVisible === 'myTips1'}
-          onRequestNext={this.handleNextTips}
+          onRequestClose={this.handleNextTips}
         >
           <Button text="My button">
         </Tips>
 
         <Tips
           visible={tipsVisible === 'myTips2'}
-          onRequestNext={this.handleNextTips}
+          onRequestClose={this.handleNextTips}
         >
           <Text>My text</Text>
         </Tips>

@@ -173,6 +173,7 @@ export default class Tips extends PureComponent {
     }
 
     this.view = null
+    this.timeoutDelay = null
 
     this.handleLayout = this.handleLayout.bind(this)
     this.handleTooltipLayout = this.handleTooltipLayout.bind(this)
@@ -232,15 +233,21 @@ export default class Tips extends PureComponent {
    * @param {Boolean=} willBeReady - If true, the component state will be ready to be visible
    */
   updateComponentPosition(willBeReady = false) {
+    const { delay } = this.props
+
     this.requestAnimationFrame(() => {
       this.view.measure((x, y, width, height, pageX, pageY) => {
         this.setState(state => ({
-          ready: willBeReady || state.ready,
           componentLeft: pageX,
           componentTop: pageY,
           componentWidth: state.componentWidth || width,
           componentHeight: state.componentHeight || height
-        }))
+        }), () => {
+          if (willBeReady) {
+            clearTimeout(this.timeoutDelay)
+            this.timeoutDelay = this.setTimeout(() => this.setState({ ready: true }), delay)
+          }
+        })
       })
     })
   }
@@ -327,9 +334,9 @@ export default class Tips extends PureComponent {
    */
   render() {
     const {
-      children, position, text,
+      children, position, text, childrenStyle,
       modalStyle, textStyle, style, contentStyle,
-      content, offsetLeft, offsetTop
+      tooltipContainerStyle, content, offsetLeft, offsetTop
     } = this.props
 
     const {
@@ -369,7 +376,7 @@ export default class Tips extends PureComponent {
                   contentStyle
                 ]}
               >
-                <View style={{ width, height }}>
+                <View style={[{ width, height }, childrenStyle]}>
                   {children}
                 </View>
 
@@ -378,7 +385,7 @@ export default class Tips extends PureComponent {
                   style={[styles.tooltipContainer, {
                     top: tooltipTop,
                     left: tooltipLeft
-                  }]}
+                  }, tooltipContainerStyle]}
                 >
                   <Tooltip
                     style={style}
@@ -410,10 +417,13 @@ Tips.defaultProps = {
   textStyle: {},
   modalStyle: {},
   contentStyle: {},
+  childrenStyle: {},
+  tooltipContainerStyle: {},
   children: [],
   content: [],
   offsetLeft: 0,
   offsetTop: 0,
+  delay: 250,
   text: '',
   position: 'top',
   onRequestClose: () => {},
@@ -422,18 +432,105 @@ Tips.defaultProps = {
 
 
 Tips.propTypes = {
+
+  /**
+   * Define the position of your tips related to the children
+   * @type {String}
+   */
   position: PropTypes.oneOf(['left', 'top', 'bottom', 'right', 'none']),
+
+  /**
+   * Override the style of your tips
+   * @type {Stylesheet}
+   */
   style: ViewPropTypes.style,
+
+  /**
+   * Override the style of the container of your tips (used for positionning)
+   * @type {Stylesheet}
+   */
+  tooltipContainerStyle: ViewPropTypes.style,
+
+  /**
+   * Override the style of the Modal Component (react-native)
+   * @type {Stylesheet}
+   */
   modalStyle: ViewPropTypes.style,
+
+  /**
+   * Override the style of the content of the Modal (used for positionning
+   * the highlight elements and tips)
+   * @type {Stylesheet}
+   */
   contentStyle: ViewPropTypes.style,
+
+  /**
+   * Override the style of the container of the children
+   * @type {Stylesheet}
+   */
+  childrenStyle: ViewPropTypes.style,
+
+  /**
+   * Override the style of the text inside the Tips
+   * @type {Stylesheet}
+   */
   textStyle: ViewPropTypes.style,
+
+  /**
+   * Add an offset of the Tips in x axis.
+   * @type {Number}
+   */
   offsetLeft: PropTypes.number,
+
+  /**
+   * Add an offset of the Tips in y axis.
+   * @type {Number}
+   */
   offsetTop: PropTypes.number,
+
+  /**
+   * Triggered when the user tap on  the screen.
+   * @type {Function}
+   */
   onRequestClose: PropTypes.func,
+
+  /**
+   * @deprecated
+   * Deprecated !!! Use onRequestClose instead. (See #waterfall-tips for more.)
+   * @type {Function}
+   */
   onRequestNext: PropTypes.func,
+
+  /**
+   * The `children` of Tips are elements that will be highlighted when the tips will be visible
+   * @type {Node}
+   */
   children: PropTypes.node,
+
+  /**
+   * Text inside the Tips.
+   * @type {String}
+   */
   text: PropTypes.string,
+
+  /**
+   * Use this property if you want to add more than a simple text inside your Tips.
+   * @type {Node}
+   */
   content: PropTypes.node,
+
+  /**
+   * Add a delay before showing the Tips
+   * @default 250
+   * @type {Number}
+   */
+  delay: PropTypes.number,
+
+  /**
+   * Set the visibility of your Tips
+   * @default false
+   * @type {Boolean}
+   */
   visible: PropTypes.bool
 }
 
