@@ -401,3 +401,162 @@ exports[`<Tips /> should render and not be visible 1`] = `
   </Modal>
 </View>
 `;
+
+exports[`<Tips /> should render tips without children 1`] = `
+<View
+  collapsable={false}
+  renderToHardwareTextureAndroid={true}
+>
+  <View
+    onLayout={[Function]}
+  />
+  <Modal
+    animationType="fade"
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 1,
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, 0.6)",
+              "flex": 1,
+              "position": "relative",
+            },
+            Object {},
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "alignSelf": "center",
+                "display": "flex",
+                "flexWrap": "nowrap",
+                "position": "absolute",
+                "width": "80%",
+              },
+              Array [
+                Object {},
+                Object {
+                  "left": 0,
+                  "top": 0,
+                },
+                Object {},
+              ],
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                Object {},
+              ]
+            }
+          />
+          <View
+            onLayout={[Function]}
+            style={
+              Array [
+                Object {
+                  "flex": 1,
+                  "position": "relative",
+                },
+                Object {
+                  "left": 0,
+                  "top": 0,
+                },
+                Object {},
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "rgba(0, 0, 0, 0.5)",
+                    "borderRadius": 4,
+                    "flexBasis": 0,
+                    "flexGrow": -1,
+                    "flexShrink": 1,
+                    "paddingBottom": 10,
+                    "paddingLeft": 10,
+                    "paddingRight": 10,
+                    "paddingTop": 10,
+                    "shadowColor": "black",
+                    "shadowOpacity": 0.5,
+                    "shadowRadius": 1,
+                  },
+                  Object {},
+                ]
+              }
+            />
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+</View>
+`;
