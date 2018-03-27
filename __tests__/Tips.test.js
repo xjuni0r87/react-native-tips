@@ -28,4 +28,15 @@ describe('<Tips />', () => {
 
     expect(tree).toMatchSnapshot()
   })
+
+  it('should render tips without children', () => {
+    const tree = renderer.create((
+      <Tips
+        visible
+        position="none"
+      />
+    )).toJSON()
+
+    expect(tree).toMatchSnapshot()
+  })
 })

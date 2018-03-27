@@ -322,9 +322,7 @@ export default class Tips extends PureComponent {
       return onRequestNext()
     }
 
-    if (onRequestClose) {
-      return onRequestClose()
-    }
+    return !!onRequestClose && onRequestClose()
   }
 
 
