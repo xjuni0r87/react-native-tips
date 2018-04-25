@@ -12,6 +12,7 @@ import {
   TextInput,
   Button,
   View,
+  Alert,
   TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -194,12 +195,13 @@ export default class App extends Component<Props> {
         <Tips
           visible={tipsVisible === 'buttonConnect'}
           onRequestNext={this.handleNextTips}
+          enableChildrenInteraction
           position="bottom"
-          text="When it's done, click here to connect to your user account."
+          text="When it's done, click here to connect to your user account. (clicking on the button won't close the Tips)"
         >
           <Button
             color={primaryColor}
-            onPress={this.start}
+            onPress={() => { Alert.alert('Click event', 'You have clicked on the button !') }}
             title="Connection"
           />
         </Tips>

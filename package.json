@@ -2,7 +2,7 @@
   "name": "react-native-tips",
   "version": "0.0.10",
   "description": "Helper to show tips when you launch your react-native for the first time",
-  "main": "index.js",
+  "main": "Tips/index.js",
   "scripts": {
     "test": "eslint ./Tips && jest",
     "test:dev": "yarn test --watch"

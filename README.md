@@ -78,6 +78,7 @@ export default MyButton
 | textStyle | Object | Optional | Override the style of the text inside the Tips |
 | tooltipContainerStyle | Object | Optional | Override the style of the container of your tips (used for positionning) |
 | visible | Boolean | Default: `false` | Set the visibility of your Tips |
+| enableChildrenInteraction | Boolean | Default: `false` | If set to true, interation with children won't close the Tips |
 
 
 # Waterfall Tips

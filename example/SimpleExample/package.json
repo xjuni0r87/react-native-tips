@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "update-tips": "yarn remove react-native-tips && yarn add react-native-tips@file:../../Tips",
     "storybook": "start-storybook -p 6006",
     "build-tips": "rm -Rf node_modules/react-native-tips && npm i react-native-tips",
     "build-storybook": "build-storybook",
@@ -13,9 +14,9 @@
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "16.2.0",
-    "react-native-tips": "^0.0.4",
     "react-mixin": "^4.0.0",
     "react-native": "0.51.0",
+    "react-native-tips": "file:../../Tips",
     "react-native-vector-icons": "^4.5.0",
     "react-timer-mixin": "^0.13.3",
     "styled-components": "^3.1.6"
