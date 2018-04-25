@@ -63,7 +63,6 @@ const getArrowStyleByPosition = (position = 'top') => {
 
 const TooltipArrow = styled.View`
   position: absolute;
-  shadow-offset: { width: 0, height: 0 };
   shadow-radius: 1px;
   shadow-color: black;
   shadow-opacity: 0.5;
@@ -75,7 +74,6 @@ const Tooltip = styled.View`
   flex: -1;
   padding: 10px;
   border-radius: 4px;
-  shadow-offset: { width: 0, height: 0 };
   shadow-radius: 1px;
   shadow-color: black;
   shadow-opacity: 0.5;
@@ -361,6 +359,7 @@ export default class Tips extends PureComponent {
           animationType="fade"
           visible={visible}
           transparent
+          onRequestClose={this.handleRequestClose}
         >
           <TouchableOpacity
             activeOpacity={1}
