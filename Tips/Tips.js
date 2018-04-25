@@ -63,7 +63,6 @@ const getArrowStyleByPosition = (position = 'top') => {
 
 const TooltipArrow = styled.View`
   position: absolute;
-  shadow-offset: { width: 0, height: 0 };
   shadow-radius: 1px;
   shadow-color: black;
   shadow-opacity: 0.5;
@@ -75,7 +74,6 @@ const Tooltip = styled.View`
   flex: -1;
   padding: 10px;
   border-radius: 4px;
-  shadow-offset: { width: 0, height: 0 };
   shadow-radius: 1px;
   shadow-color: black;
   shadow-opacity: 0.5;
@@ -91,10 +89,16 @@ const ModalContent = styled.View`
 
 const ChildrenOverlay = styled.TouchableOpacity`
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+`
+
+const HighlightView = styled.View`
+  position: relative;
+  z-index: 0;
 `
 
 
@@ -335,7 +339,7 @@ export default class Tips extends PureComponent {
   render() {
     const {
       children, position, text, childrenStyle,
-      modalStyle, textStyle, style, contentStyle,
+      modalStyle, textStyle, style, contentStyle, enableChildrenInteraction,
       tooltipContainerStyle, content, offsetLeft, offsetTop
     } = this.props
 
@@ -361,6 +365,7 @@ export default class Tips extends PureComponent {
           animationType="fade"
           visible={visible}
           transparent
+          onRequestClose={this.handleRequestClose}
         >
           <TouchableOpacity
             activeOpacity={1}
@@ -376,9 +381,21 @@ export default class Tips extends PureComponent {
                   contentStyle
                 ]}
               >
-                <View style={[{ width, height }, childrenStyle]}>
+                <ChildrenOverlay
+                  onPress={this.handleRequestClose}
+                  style={styles.childrenOverlay}
+                />
+
+                <HighlightView
+                  style={[{
+                    width,
+                    height,
+                    zIndex: enableChildrenInteraction ? 2 : 0
+                    }, childrenStyle
+                  ]}
+                >
                   {children}
-                </View>
+                </HighlightView>
 
                 <View
                   onLayout={this.handleTooltipLayout}
@@ -395,11 +412,6 @@ export default class Tips extends PureComponent {
                     {position !== 'none' && <TooltipArrow position={position} />}
                   </Tooltip>
                 </View>
-
-                <ChildrenOverlay
-                  onPress={this.handleRequestClose}
-                  style={styles.childrenOverlay}
-                />
               </ModalContent>
 
             </View>
@@ -427,7 +439,8 @@ Tips.defaultProps = {
   text: '',
   position: 'top',
   onRequestClose: () => {},
-  onRequestNext: null
+  onRequestNext: null,
+  enableChildrenInteraction: false
 }
 
 
@@ -531,7 +544,14 @@ Tips.propTypes = {
    * @default false
    * @type {Boolean}
    */
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
+
+  /**
+   * If set to true, interation with children won't close the Tips
+   * @default false
+   * @type {Boolean}
+   */
+  enableChildrenInteraction: PropTypes.bool,
 }
 
 

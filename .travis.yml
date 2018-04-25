@@ -3,4 +3,4 @@ install: npm cache verify && npm i
 node_js:
   - "stable"
 script:
-  - npm test
+  - yarn test
