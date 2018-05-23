@@ -172,6 +172,7 @@ export default class Menu extends PureComponent {
             <Tips
               visible={tipsMenuVisible}
               contentStyle={{ width: '80%' }}
+              tooltipArrowStyle={{ display: 'none' }}
               position="left"
               text="In this menu, just click to the desired functionality."
               onRequestNext={onRequestNext}
