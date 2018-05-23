@@ -11,53 +11,53 @@ import {
 
 const getArrowStyleByPosition = (position = 'top') => {
   switch (position) {
-    case 'right': return `
-      left: -5px;
-      top: 50%;
-      margin-top: 5px;
-      border-top-width: 5px;
-      border-top-color: transparent;
-      border-bottom-width: 5px;
-      border-bottom-color: transparent;
-      border-right-width: 5px;
-      border-right-color: rgba(0, 0, 0, 0.5);
-    `
+    case 'right': return {
+      left: -5,
+      top: '50%',
+      marginTop: 5,
+      borderTopWidth: 5,
+      borderRightWidth: 5,
+      borderBottomWidth: 5,
+      borderTopColor: 'transparent',
+      borderBottomColor: 'transparent',
+      borderRightColor: 'rgba(0, 0, 0, 0.5)'
+    }
 
-    case 'left': return `
-      right: -5px;
-      top: 50%;
-      margin-top: 5px;
-      border-top-width: 5px;
-      border-top-color: transparent;
-      border-bottom-width: 5px;
-      border-bottom-color: transparent;
-      border-left-width: 5px;
-      border-left-color: rgba(0, 0, 0, 0.5);
-    `
+    case 'left': return {
+      right: -5,
+      top: '50%',
+      marginTop: 5,
+      borderTopWidth: 5,
+      borderLeftWidth: 5,
+      borderBottomWidth: 5,
+      borderTopColor: 'transparent',
+      borderBottomColor: 'transparent',
+      borderLeftColor: 'rgba(0, 0, 0, 0.5)'
+    }
 
-    case 'bottom': return `
-      top: -5px;
-      left: 50%;
-      margin-left: 2.5px;
-      border-bottom-width: 5px;
-      border-bottom-color: rgba(0, 0, 0, 0.5);
-      border-right-width: 5px;
-      border-right-color: transparent;
-      border-left-width: 5px;
-      border-left-color: transparent;
-    `
+    case 'bottom': return {
+      top: -5,
+      left: '50%',
+      marginLeft: 2.5,
+      borderLeftWidth: 5,
+      borderRightWidth: 5,
+      borderBottomWidth: 5,
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderBottomColor: 'rgba(0, 0, 0, 0.5)'
+    }
 
-    default: return `
-      bottom: -5px;
-      left: 50%;
-      margin-left: 2.5px;
-      border-top-width: 5px;
-      border-top-color: rgba(0, 0, 0, 0.5);
-      border-right-width: 5px;
-      border-right-color: transparent;
-      border-left-width: 5px;
-      border-left-color: transparent;
-    `
+    default: return {
+      bottom: -5,
+      left: '50%',
+      marginLeft: 2.5,
+      borderTopWidth: 5,
+      borderLeftWidth: 5,
+      borderRightWidth: 5,
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderTopColor: 'rgba(0, 0, 0, 0.5)'
+    }
   }
 }
 
@@ -66,7 +66,6 @@ const TooltipArrow = styled.View`
   shadow-radius: 1px;
   shadow-color: black;
   shadow-opacity: 0.5;
-  ${props => getArrowStyleByPosition(props.position)}
 `
 
 const Tooltip = styled.View`
@@ -338,7 +337,7 @@ export default class Tips extends PureComponent {
    */
   render() {
     const {
-      children, position, text, childrenStyle,
+      children, position, text, childrenStyle, tooltipArrowStyle,
       modalStyle, textStyle, style, contentStyle, enableChildrenInteraction,
       tooltipContainerStyle, content, offsetLeft, offsetTop
     } = this.props
@@ -409,7 +408,11 @@ export default class Tips extends PureComponent {
                   >
                     {content}
                     {!!text && <Text style={[styles.text, textStyle]}>{text}</Text>}
-                    {position !== 'none' && <TooltipArrow position={position} />}
+                    {position !== 'none' && (
+                      <TooltipArrow
+                        style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
+                      />
+                    )}
                   </Tooltip>
                 </View>
               </ModalContent>
@@ -430,6 +433,7 @@ Tips.defaultProps = {
   modalStyle: {},
   contentStyle: {},
   childrenStyle: {},
+  tooltipArrowStyle: {},
   tooltipContainerStyle: {},
   children: [],
   content: [],
@@ -463,6 +467,12 @@ Tips.propTypes = {
    * @type {Stylesheet}
    */
   tooltipContainerStyle: ViewPropTypes.style,
+
+  /**
+   * Add style to the tooltip arrow
+   * @type {Stylesheet}
+   */
+  tooltipArrowStyle: ViewPropTypes.style,
 
   /**
    * Override the style of the Modal Component (react-native)
@@ -551,7 +561,7 @@ Tips.propTypes = {
    * @default false
    * @type {Boolean}
    */
-  enableChildrenInteraction: PropTypes.bool,
+  enableChildrenInteraction: PropTypes.bool
 }
 
 
