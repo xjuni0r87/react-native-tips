@@ -3,7 +3,8 @@ import { Text } from 'react-native'
 
 import Tips from './../Tips'
 
-import renderer from 'react-test-renderer';
+// eslint-disable-next-line
+import renderer from 'react-test-renderer'
 
 
 describe('<Tips />', () => {

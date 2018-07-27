@@ -2,14 +2,15 @@
 *.log
 
 # Runtime data
-tmp
+tmp/
 .babelrc
 
 # Dependency directory
-node_modules
-bower_components
+node_modules/
+bower_components/
 
-doc
-example
+__tests__/
+doc/
+example/
 .storybook
 storybook

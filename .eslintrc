@@ -3,6 +3,9 @@
   "globals": {
     "fetch": false
   },
+  "env": {
+    "jest": true
+  },
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {

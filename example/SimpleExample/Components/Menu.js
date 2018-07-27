@@ -170,12 +170,13 @@ export default class Menu extends PureComponent {
             <MenuItem icon="home" text="home" />
 
             <Tips
+              position="left"
               visible={tipsMenuVisible}
+              textStyle={{ fontSize: 20 }}
+              onRequestNext={onRequestNext}
               contentStyle={{ width: '80%' }}
               tooltipArrowStyle={{ display: 'none' }}
-              position="left"
               text="In this menu, just click to the desired functionality."
-              onRequestNext={onRequestNext}
             >
               <MenuItem icon="search" text="search" />
             </Tips>

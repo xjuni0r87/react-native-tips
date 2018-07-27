@@ -497,7 +497,7 @@ Tips.propTypes = {
    * Override the style of the text inside the Tips
    * @type {Stylesheet}
    */
-  textStyle: ViewPropTypes.style,
+  textStyle: Text.propTypes.style,
 
   /**
    * Add an offset of the Tips in x axis.

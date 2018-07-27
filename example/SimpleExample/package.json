@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react": "16.2.0",
     "react-mixin": "^4.0.0",
-    "react-native": "0.51.0",
+    "react": "^16.2.0",
+    "react-native": "^0.51.0",
     "react-native-tips": "file:../../Tips",
     "react-native-vector-icons": "^4.5.0",
     "react-timer-mixin": "^0.13.3",
