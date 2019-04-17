@@ -386,6 +386,7 @@ export default class Tips extends PureComponent {
                 />
 
                 <HighlightView
+                  pointerEvents={enableChildrenInteraction ? 'auto' : 'none'}
                   style={[{
                     width,
                     height,
